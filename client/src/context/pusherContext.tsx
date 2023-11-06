@@ -26,7 +26,7 @@ export const PusherContextProvider = (
 
   useEffect(() => {
     if (!isLoading && user && isAuthenticated) {
-      const pusherInstance = new Pusher("e2ba268a03202df31b4e", {
+      const pusherInstance = new Pusher(import.meta.env.PUHSER_KEY, {
         cluster: "mt1",
         userAuthentication: {
           endpoint: "http://localhost:3000/api/pusher/user-auth",
