@@ -2,12 +2,15 @@ import Router from "koa-router";
 import Koa from "koa";
 import Pusher from "pusher";
 import { v4 as uuidv4 } from "uuid";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const pusher = new Pusher({
-  appId: "1697242",
-  key: "e2ba268a03202df31b4e",
-  secret: "bf47b93d58be56a88b6b",
-  cluster: "mt1",
+  appId: process.env.PUSHER_APP_ID ?? "",
+  key: process.env.PUSHER_KEY ?? "",
+  secret: process.env.PUSHER_SECRET ?? "",
+  cluster: process.env.PUSHER_CLUSTER ?? "",
 });
 
 const router = new Router({ prefix: "/message" });
