@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1698908267168,
+      "tag": "0000_careless_nextwave",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1699030240472,
+      "tag": "0001_huge_spectrum",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1699240105378,
+      "tag": "0002_broad_dreadnoughts",
+      "breakpoints": true
+    }
+  ]
+}
