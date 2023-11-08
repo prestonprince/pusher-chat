@@ -6,5 +6,5 @@ export const messages = sqliteTable("messages", {
   senderId: text("sender_id"),
   status: text("status"),
   senderName: text("sender_name"),
-  readBy: text("readBy"),
+  readBy: text("readBy").notNull(),
 });

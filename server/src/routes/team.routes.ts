@@ -105,6 +105,7 @@ router.post("/:id/messages", async (ctx: Koa.Context) => {
     senderId,
     status: "sent",
     senderName,
+    readBy: [],
   };
 
   // check team's list length
@@ -114,12 +115,19 @@ router.post("/:id/messages", async (ctx: Koa.Context) => {
     for (let i = 0; i <= listLength; ++i) {
       const messageData = await messageCache.lpop(teamChannelName);
       if (messageData) {
-        const { messageId, message, senderId, status, senderName } =
+        const { messageId, message, senderId, status, senderName, readBy } =
           JSON.parse(messageData);
 
         const createdMessage = await db
           .insert(messages)
-          .values({ id: messageId, message, senderId, status, senderName })
+          .values({
+            id: messageId,
+            message,
+            senderId,
+            status,
+            senderName,
+            readBy: JSON.stringify(readBy),
+          })
           .returning()
           .get();
 
@@ -171,6 +179,7 @@ router.patch("/:id/messages", async (ctx: Koa.Context) => {
     if (redisMessageIdx !== -1) {
       const message = messageList[redisMessageIdx];
       message.status = update.status;
+      message.readBy.push(update.readerId);
       await messageCache.lset(
         teamChannelName,
         redisMessageIdx,
@@ -183,6 +192,14 @@ router.patch("/:id/messages", async (ctx: Koa.Context) => {
         id: update.messageId,
       });
     } else {
+      const message = await db
+        .select()
+        .from(messages)
+        .where(eq(messages.id, update.messageId))
+        .get();
+      if (!message) ctx.throw(404, "message not found");
+      JSON.stringify([]);
+      const updatedReadByList = JSON.parse(message.readBy);
       const updatedMessage = await db
         .update(messages)
         .set({ status: update.status })
