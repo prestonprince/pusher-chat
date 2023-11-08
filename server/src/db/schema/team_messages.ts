@@ -7,5 +7,4 @@ export const teamMessages = sqliteTable("team_messages", {
   id: text("id").primaryKey(),
   messageId: text("message_id").references(() => messages.id),
   teamId: text("team_id").references(() => teams.id),
-  readBy: text("read_by"),
 });
