@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       logoutUri={import.meta.env.VITE_KINDE_LOGOUT_URL}
       redirectUri={import.meta.env.VITE_KINDE_REDIRECT_URL}
     >
-      <PusherContextProvider>
+      <PusherContextProvider pusherKey={import.meta.env.VITE_PUSHER_KEY}>
         <QueryClientProvider client={queryClient}>
           <App />
           <Toaster />

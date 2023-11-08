@@ -4,6 +4,7 @@ import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 
 interface PusherContextProviderProps {
   children: React.ReactElement;
+  pusherKey: string;
 }
 
 interface PusherContextProps {
@@ -26,7 +27,7 @@ export const PusherContextProvider = (
 
   useEffect(() => {
     if (!isLoading && user && isAuthenticated) {
-      const pusherInstance = new Pusher(import.meta.env.PUHSER_KEY, {
+      const pusherInstance = new Pusher(props.pusherKey, {
         cluster: "mt1",
         userAuthentication: {
           endpoint: "http://localhost:3000/api/pusher/user-auth",
