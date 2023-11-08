@@ -61,7 +61,7 @@ export const PusherContextProvider = (
         console.log("pusher disconnected");
       };
     }
-  }, [isAuthenticated, isLoading, user]);
+  }, [isAuthenticated, isLoading, user, props.pusherKey]);
 
   return (
     <PusherContext.Provider value={{ pusher, presenceChannel }}>
