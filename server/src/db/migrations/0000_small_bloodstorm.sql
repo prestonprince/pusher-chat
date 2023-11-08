@@ -1,7 +1,10 @@
 CREATE TABLE `messages` (
 	`id` text PRIMARY KEY NOT NULL,
 	`message` text,
-	`sender_id` text
+	`sender_id` text,
+	`status` text,
+	`sender_name` text,
+	`readBy` text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE `team_members` (

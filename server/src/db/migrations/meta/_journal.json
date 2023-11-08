@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1698908267168,
-      "tag": "0000_careless_nextwave",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1699030240472,
-      "tag": "0001_huge_spectrum",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1699240105378,
-      "tag": "0002_broad_dreadnoughts",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1699470665946,
-      "tag": "0003_normal_the_leader",
+      "when": 1699471795765,
+      "tag": "0000_small_bloodstorm",
       "breakpoints": true
     }
   ]
