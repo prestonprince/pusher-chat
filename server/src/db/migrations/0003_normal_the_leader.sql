@@ -1,0 +1,1 @@
+ALTER TABLE team_messages ADD `read_by` text;
