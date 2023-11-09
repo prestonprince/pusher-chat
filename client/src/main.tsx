@@ -6,6 +6,7 @@ import { KindeProvider } from "@kinde-oss/kinde-auth-react";
 import { PusherContextProvider } from "./context/pusherContext.tsx";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { Toaster } from "./components/ui/toaster.tsx";
+import { PusherEventContextProvider } from "./context/pusherEventContext.tsx";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +20,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     >
       <PusherContextProvider pusherKey={import.meta.env.VITE_PUSHER_KEY}>
         <QueryClientProvider client={queryClient}>
-          <App />
+          <PusherEventContextProvider>
+            <App />
+          </PusherEventContextProvider>
           <Toaster />
         </QueryClientProvider>
       </PusherContextProvider>

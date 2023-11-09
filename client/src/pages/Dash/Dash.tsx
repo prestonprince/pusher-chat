@@ -6,6 +6,8 @@ import { ProgressBar } from "@/components/custom/ProgressBar";
 
 import { Nav } from "@/components/custom/Nav";
 import { TeamCard } from "@/components/custom/TeamCard";
+import { usePusherContext } from "@/context/util";
+import { useEffect } from "react";
 
 export interface TTeam {
   id: string;
@@ -29,6 +31,11 @@ export const Dash = () => {
   const navigate = useNavigate();
   const userId = user && user.id ? user.id : "";
   const { isLoading: isLoadingTeams, data, isError } = useGetUserTeams(userId);
+  // const { pusherInstance } = usePusherContext();
+
+  // if (pusherInstance) {
+  //   console.log(pusherInstance.user.user_data);
+  // }
 
   if (isLoading) {
     return (

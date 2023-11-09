@@ -12,8 +12,8 @@ export interface TMessageProps {
 export const Message = (props: TMessageProps) => {
   const { message } = props;
   const [status, setStatus] = useState<string>(message.status);
-  const { pusher } = usePusherContext();
-  const channel = usePusherChannel(pusher, `message-${message.id}`);
+  const { pusherInstance } = usePusherContext();
+  const channel = usePusherChannel(pusherInstance, `message-${message.id}`);
 
   useEffect(() => {
     if (channel) {

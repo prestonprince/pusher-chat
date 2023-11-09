@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-interface StatusParams {
-  statusUpdates: Record<string, string>[];
-  id: string;
+export interface StatusParams {
+  messageId: string;
+  status: string;
+  readerId: string;
+  senderId: string;
+  teamId: string;
 }
 
 export interface NewMessageParams {
@@ -21,8 +24,14 @@ export function useSendStatusUpdate() {
   return useMutation({
     mutationFn: (data: StatusParams) =>
       axios.patch(
-        "http://localhost:3000/api/team/:id/messages".replace(":id", data.id),
-        { statusUpdates: data.statusUpdates }
+        "http://localhost:3000/api/team/:id/messages/:messageId"
+          .replace(":id", data.teamId)
+          .replace(":messageId", data.messageId),
+        {
+          status: data.status,
+          readerId: data.readerId,
+          senderId: data.senderId,
+        }
       ),
   });
 }

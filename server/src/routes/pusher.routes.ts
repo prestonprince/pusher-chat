@@ -1,6 +1,10 @@
 import Koa from "koa";
 import Router from "koa-router";
 import { pusher } from "./message.routes";
+import { db } from "../db/db";
+import { teams } from "../db/schema/teams";
+import { teamMembers } from "../db/schema/team_members";
+import { eq } from "drizzle-orm";
 
 const router = new Router({ prefix: "/pusher" });
 
@@ -20,15 +24,20 @@ router.post("/user-auth", async (ctx: Koa.Context) => {
   const socketId = ctx.request.body.socket_id;
   const { id, ...rest } = JSON.parse(ctx.request.body.user);
 
+  const userTeams = await db
+    .select()
+    .from(teams)
+    .leftJoin(teamMembers, eq(teams.id, teamMembers.teamId))
+    .where(eq(teamMembers.userId, id));
+
+  const teamIds = userTeams.map((team) => team.teams.id);
+
   const user = {
     id,
     user_info: {
       ...rest,
+      teamIds,
     },
-    // watchlist:
-    //   id === "kp_62bd825178664ff591e0d0f5b7d4ce12"
-    //     ? ["kp_f0f198473d6a451c9a802b9760949939"]
-    //     : ["kp_62bd825178664ff591e0d0f5b7d4ce12"],
   };
 
   const authResponse = pusher.authenticateUser(socketId, user);
